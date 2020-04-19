@@ -1,33 +1,6 @@
 import React from 'react'
-import {createGlobalStyle, ThemeProvider} from 'styled-components'
-import {
-    reset,
-    themes,
-    List,
-    ListItem,
-    Divider,
-    Window,
-    WindowHeader,
-    Button,
-    Toolbar,
-    WindowContent,
-    Tabs,
-    Tab,
-    TabBody,
-    TextArea,
-    TextField,
-    Progress,
-    Fieldset,
-    Hourglass,
-    Table,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableHeadCell,
-    TableDataCell
-
-} from 'react95'
 import axios from 'axios'
+import { Button, Form, FormGroup, Label, Input, FormText  } from 'reactstrap';
 
 export default class SearchSubs extends React.Component {
     constructor(props) {
@@ -35,8 +8,15 @@ export default class SearchSubs extends React.Component {
         this.state = {
             subreddit: 'House',
             filter: 'month',
-            links: []
+            links: [],
+            selectMulti: [],
+            subredditList: ["r/TrueHouse", "r/listentous", "r/hiphopheads", "r/house", "r/blues", "r/jazz"]
         }
+    }
+
+    handleChange = e => {
+        const {name, value} = e.target
+        this.setState({[name]: value})
     }
 
     handleSubmit = e => {
@@ -57,47 +37,23 @@ export default class SearchSubs extends React.Component {
     }
 
     render() {
-        const { links } = this.state
+        const { links, subredditList } = this.state
         return (
-            <div className="container">
-                <ResetStyles/>
-                <ThemeProvider theme={themes.default}>
-                    <Window
-                    style={{
-                        width: 600
-                    }}>
-                        <WindowHeader
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
-                        }}>
-                            
-                        </WindowHeader>
-                        <WindowContent>
-                            <ul>
-                                {links.map((l) => {
-                                    return (
-                                    <li>{l}</li>
-                                    )
-                                })}
-                                
-                            </ul>
-
-                        <Button
-                            fullWidth
-                            onClick={this.handleSubmit}>
-                                Poop!
-                        </Button>
-                        </WindowContent>
-
-                    </Window>
-                </ThemeProvider>
+            <div style={{paddingTop: 50, paddingLeft: 200, paddingRight: 200}}>
+                <Form>
+                    <FormGroup>
+                        <Input type="select" name="selectMulti" value={this.handleChange} multiple>
+                            {subredditList.map((sub) => {
+                                return (
+                                    <option>{sub}</option>
+                                )
+                            })}
+                        </Input>
+                    </FormGroup>
+                    <Button color="primary" size="lg">Submit</Button>
+                </Form>
             </div>
         )
     }
 }
 
-const ResetStyles = createGlobalStyle `
-  ${reset}
-`;
