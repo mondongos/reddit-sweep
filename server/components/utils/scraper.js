@@ -13,7 +13,7 @@ const scrape = async (subreddit, filter) => {
     });
     return data
   } catch (e) {
-    console.log(e)
+    return e
   }
 }
 

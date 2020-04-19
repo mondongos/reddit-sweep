@@ -1,13 +1,19 @@
 const router = require('express').Router()
+const searchController = require('../components/searchController')
 
-router.route('/search').post(async(req,res) => {
+router.route('/').post(async(req,res) => {
     let subreddit = req.body.subreddit
     let filter = req.body.filter
 
     try {
-        // function 
+        await searchController(subreddit, filter)
+        .then((resolve) => {
+            res.send(resolve)
+            console.log(resolve)
+        })
     } catch(e) {
-        // error
+        res.send(e)
+        console.log(e)
     }
 })
 
