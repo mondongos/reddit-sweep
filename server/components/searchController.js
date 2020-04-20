@@ -5,9 +5,12 @@ const searchController = async (subreddit, filter) => {
         const rawLinks = await scrape(subreddit, filter)
         const filtered = []
         rawLinks.map((link) => {
-            (link.includes("reddit") || link.includes(subreddit) || link.includes("/user/")) ? null : filtered.push(link)
+            (link.toLowerCase().includes("reddit") || link.toLowerCase().includes(subreddit) || link.toLowerCase().includes("/user/")) ? null : filtered.push(link)
+            
         })
-        return filtered
+        return filtered.reduce((unique, item) => {
+            return unique.includes(item) ? unique : [...unique, item]
+        }, [])
     } catch(e) {
         return e 
     }
