@@ -1,18 +1,28 @@
 const scrape = require('./utils/scraper')
+const tubeTitle = require('./utils/tubeTitle')
 
-const searchController = async (subreddit, filter) => {
+const searchController = async(subreddit, filter) => {
     try {
         const rawLinks = await scrape(subreddit, filter)
-        const filtered = []
+        let filtered = []
+        let filtered2 = []
         rawLinks.map((link) => {
-            (link.toLowerCase().includes("reddit") || link.toLowerCase().includes(subreddit) || link.toLowerCase().includes("/user/")) ? null : filtered.push(link)
-            
+            (link.toLowerCase().includes("reddit") || link.toLowerCase().includes(subreddit) || link.toLowerCase().includes("/user/")) || link === "/"
+                ? null
+                : filtered.push(link)
         })
-        return filtered.reduce((unique, item) => {
-            return unique.includes(item) ? unique : [...unique, item]
+        return filtered2 = filtered.reduce((unique, item) => {
+            return unique.includes(item)
+                ? unique
+                : [
+                    ...unique,
+                    item
+                ]
         }, [])
-    } catch(e) {
-        return e 
+
+
+    } catch (e) {
+        return e
     }
 }
 

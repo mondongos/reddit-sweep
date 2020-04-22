@@ -1,4 +1,6 @@
 # Reddit Sweeper
-Pick subreddits, sweep their 10 best songs for week/month and save the links. 
+Pick subreddits, sweep their best songs for week/month and save the links. 
 
-https://github.com/styled-components/awesome-styled-components#built-with-styled-components
+## Todo 
+- Get YouTube title into h1 tag 
+- Add subreddit - create object with link and sub keys

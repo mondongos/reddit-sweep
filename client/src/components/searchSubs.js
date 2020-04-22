@@ -38,7 +38,7 @@ export default class SearchSubs extends React.Component {
         .then((res) => {
             
             this.setState({
-                links: res.data.filter(l => l !== "/")
+                links: res.data
             })
             console.log(this.state)
         })
@@ -65,6 +65,10 @@ export default class SearchSubs extends React.Component {
                         </FormGroup>
                         <Button onClick={this.handleSubmit} color="primary" size="lg">Submit</Button>
                     </Form>
+                </Container>
+                <br></br>
+                <Container>
+                    <p>Number of results: {this.state.links.length}</p>
                 </Container>
                 <br></br>
                 {links.map((video) => {

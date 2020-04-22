@@ -9,7 +9,7 @@ router.route('/').post(async(req,res) => {
         await searchController(subreddit, filter)
         .then((resolve) => {
             res.send(resolve)
-            console.log(resolve)
+            console.log("get it! ___________", resolve)
         })
     } catch(e) {
         res.send(e)
